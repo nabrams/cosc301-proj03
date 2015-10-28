@@ -19,6 +19,8 @@ fetchint(uint addr, int *ip)
 {
   if(addr >= proc->sz || addr+4 > proc->sz)
     return -1;
+  //Disallows access to page 1 unless it is requested by the parent process
+  else if (proc->pid != 1 && addr < PGSIZE) return -1;
   *ip = *(int*)(addr);
   return 0;
 }
@@ -33,6 +35,8 @@ fetchstr(uint addr, char **pp)
 
   if(addr >= proc->sz)
     return -1;
+  //Disallows access to page 1 unless it is requested by the parent process
+  else if (proc->pid != 1 && addr < PGSIZE) return -1;
   *pp = (char*)addr;
   ep = (char*)proc->sz;
   for(s = *pp; s < ep; s++)
@@ -55,7 +59,6 @@ int
 argptr(int n, char **pp, int size)
 {
   int i;
-  
   if(argint(n, &i) < 0)
     return -1;
   if((uint)i >= proc->sz || (uint)i+size > proc->sz)
