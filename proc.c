@@ -464,3 +464,18 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+//adding new stuff
+
+int 
+kernel_mprotect(void *addr, int len)
+{
+}
+
+int
+kernel_munprotect(void *addr, int len)
+{
+}
+
+
+

@@ -89,3 +89,19 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//new code
+int
+sys_mprotect(void)
+{
+//call into kernel using kernel mprotect?
+//return that function call?
+}
+
+int
+sys_munprotect(void)
+{
+//call into kernel using kernel munprotect?
+//return that function call?
+}
+

@@ -179,5 +179,13 @@ void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
 
+
+//for the new system calls
+int             kernel_mprotect(void*, int);
+int             kernel_munprotect(void*, int);
+
+void            complete_mprotect(struct proc *);
+void            complete_munprotect(struct proc *);
+
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))
