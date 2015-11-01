@@ -381,6 +381,7 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
 //new additions
 void
 complete_mprotect(struct proc *p){
+
 }
 
 void

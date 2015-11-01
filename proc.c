@@ -470,11 +470,13 @@ procdump(void)
 int 
 kernel_mprotect(void *addr, int len)
 {
+return 0;
 }
 
 int
 kernel_munprotect(void *addr, int len)
 {
+return 0;
 }
 
 

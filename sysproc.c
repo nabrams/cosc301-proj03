@@ -96,6 +96,7 @@ sys_mprotect(void)
 {
 //call into kernel using kernel mprotect?
 //return that function call?
+return 0;
 }
 
 int
@@ -103,5 +104,5 @@ sys_munprotect(void)
 {
 //call into kernel using kernel munprotect?
 //return that function call?
+return 0;
 }
-
