@@ -184,8 +184,8 @@ void            clearpteu(pde_t *pgdir, char *uva);
 int             kernel_mprotect(void*, int);
 int             kernel_munprotect(void*, int);
 
-void            complete_mprotect(struct proc *);
-void            complete_munprotect(struct proc *);
+void            complete_mprotect(void*, int);
+void            complete_munprotect(void*, int);
 
 // number of elements in fixed-size array
 #define NELEM(x) (sizeof(x)/sizeof((x)[0]))

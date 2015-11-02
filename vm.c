@@ -380,12 +380,25 @@ copyout(pde_t *pgdir, uint va, void *p, uint len)
 
 //new additions
 void
-complete_mprotect(struct proc *p){
-
+complete_mprotect(void *addr, int len){
+pde_t *tmp;
+int i = 0;
+for (; i < len; i++){
+    tmp = walkpgdir(proc->pgdir, (void*)(addr+(i*PGSIZE)), 0);
+    if (tmp != 0) *tmp = *tmp & (~PTE_W);
+}
+lcr3(v2p(proc->pgdir));
 }
 
 void
-complete_munprotect(struct proc *p){
+complete_munprotect(void *addr, int len){
+pde_t *tmp;
+int i = 0;
+for (; i < len; i++){
+    tmp = walkpgdir(proc->pgdir, (void*)(addr+(i*PGSIZE)), 0);
+    if (tmp != 0) *tmp = *tmp | (~PTE_W);
+}
+lcr3(v2p(proc->pgdir));
 
 }
 

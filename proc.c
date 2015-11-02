@@ -470,12 +470,32 @@ procdump(void)
 int 
 kernel_mprotect(void *addr, int len)
 {
+//Check for valid number address
+if ((uint)addr % PGSIZE != 0) return -1;
+//Invalid number of entries to change
+if (len <= 0) return -1;
+if ((uint)addr >= proc->sz || (uint)addr + 4 > proc->sz) return -1;
+//First page invalid
+if ((uint)addr < PGSIZE) return -1;
+//Number of entries to change outside of page range
+if ((uint)addr + (len * PGSIZE) > proc->sz) return -1;
+complete_mprotect(addr, len);
 return 0;
 }
 
 int
 kernel_munprotect(void *addr, int len)
 {
+//Check for valid number address
+if ((uint)addr % PGSIZE != 0) return -1;
+//Invalid number of entries to change
+if (len <= 0) return -1;
+if ((uint)addr >= proc->sz || (uint)addr + 4 > proc->sz) return -1;
+//First page invalid
+if ((uint)addr < PGSIZE) return -1;
+//Number of entries to change outside of page range
+if ((uint)addr + (len * PGSIZE) > proc->sz) return -1;
+complete_mprotect(addr, len);
 return 0;
 }
 

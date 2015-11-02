@@ -94,15 +94,20 @@ sys_uptime(void)
 int
 sys_mprotect(void)
 {
-//call into kernel using kernel mprotect?
-//return that function call?
-return 0;
+int addr;
+int len;
+if (argint(1, &len) < 0) return -1;
+if (argint(0, &addr) < 0) return -1;
+return kernel_mprotect((void *)addr, len);
 }
 
 int
 sys_munprotect(void)
 {
-//call into kernel using kernel munprotect?
-//return that function call?
+int addr;
+int len;
+if (argint(1, &len) < 0) return -1;
+if (argint(0, &addr) < 0) return -1;
+return kernel_munprotect((void *)addr, len);
 return 0;
 }
